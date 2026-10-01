@@ -1,0 +1,132 @@
+.admin-welcome-page {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1a1a1a;
+  padding: 24px;
+}
+
+.ambient-dots {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.ambient-dot {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.25);
+  animation: breathe ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.8); }
+}
+
+.admin-loader {
+  text-align: center;
+}
+
+.loader-word {
+  font-family: 'Playfair Display', serif;
+  color: #fff;
+  font-size: 32px;
+  letter-spacing: 10px;
+  opacity: 0;
+  margin: 0;
+}
+
+.loader-bar {
+  width: 0;
+  height: 1px;
+  background-color: #b08d57;
+  margin: 18px auto 0;
+}
+
+.admin-welcome-content {
+  text-align: center;
+  max-width: 320px;
+  position: relative;
+  z-index: 2;
+}
+
+.welcome-logo {
+  font-family: 'Playfair Display', serif;
+  color: #fff;
+  font-size: 26px;
+  letter-spacing: 3px;
+  margin: 0 0 8px;
+}
+
+.welcome-label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+.welcome-heading {
+  font-family: 'Playfair Display', serif;
+  color: #fff;
+  font-size: 22px;
+  margin: 0 0 10px;
+}
+
+.welcome-subtext {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 32px;
+  line-height: 1.5;
+}
+
+.welcome-primary-btn {
+  width: 100%;
+  background-color: #fff;
+  color: #1a1a1a;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.welcome-primary-btn:hover {
+  transform: scale(1.02);
+  background-color: #f0f0f0;
+}
+
+.welcome-secondary {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.welcome-link {
+  color: #fff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.admin-footer {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.3);
+}

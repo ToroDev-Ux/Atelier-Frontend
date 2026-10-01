@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.process-step {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  align-items: start;
+  padding: 48px 0;
+  border-top: 1px solid #e8e4da;
+}
+
+.process-step-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 94px;
+  padding-top: 20px;
+  font-weight: 200;
+  color: #d8d3c8;
+  line-height: 1;
+}
+
+.process-step-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 44px;
+  font-weight: 100;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+}
+
+.process-step-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  margin-top: 30px;
+  line-height: 1.5;
+  font-weight: normal;
+  color: #6b6b6b;
+  max-width: 600px;
+}

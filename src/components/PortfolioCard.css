@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.portfolio-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-card-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.portfolio-card-info {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.portfolio-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: #1a1a1a;
+}
+
+.portfolio-card-year {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #8a8a8a;
+}
+
+.portfolio-card-category {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}

@@ -1,0 +1,27 @@
+@import './AdminSignup.css';
+
+.static-field {
+  color: #1a1a1a;
+  font-size: 14px;
+}
+
+.pin-boxes {
+  display: flex;
+  gap: 10px;
+  margin: 4px 0 8px;
+}
+
+.pin-box-light {
+  width: 44px;
+  height: 44px;
+  text-align: center;
+  font-size: 18px;
+  border: 1px solid #e0ddd4;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.pin-box-light:focus {
+  outline: none;
+  border-color: #1a1a1a;
+}
