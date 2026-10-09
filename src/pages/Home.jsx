@@ -5,6 +5,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import PortfolioCard from '../components/PortfolioCard'
 import useScrollReveal from '../hooks/useScrollReveal'
+import API_URL from '../api/apiConfig'
 import './Home.css'
 import { Lightbulb, Compass, PenTool, Sparkles } from 'lucide-react'
 import ServiceCard from '../components/ServiceCard'
@@ -86,8 +87,7 @@ const Home = () => {
     const fetchHeroImage = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:5000/api/v1/hero-images'
-        )
+          `${API_URL}/api/v1/hero-images`)
 
         const images = response.data
 
@@ -153,9 +153,8 @@ const Home = () => {
       <section className="portfolio-preview">
         <div
           ref={headerRef}
-          className={`portfolio-preview-header reveal ${
-            headerVisible ? 'visible' : ''
-          }`}
+          className={`portfolio-preview-header reveal ${headerVisible ? 'visible' : ''
+            }`}
         >
           <span className="section-label">
             Selected Works
@@ -230,9 +229,8 @@ const Home = () => {
       >
         <div
           ref={servicesHeaderRef}
-          className={`services-preview-header reveal ${
-            servicesHeaderVisible ? 'visible' : ''
-          }`}
+          className={`services-preview-header reveal ${servicesHeaderVisible ? 'visible' : ''
+            }`}
         >
           <span className="section-labelb">
             What We Do
@@ -283,9 +281,8 @@ const Home = () => {
       >
         <div
           ref={processHeaderRef}
-          className={`process-preview-header reveal ${
-            processHeaderVisible ? 'visible' : ''
-          }`}
+          className={`process-preview-header reveal ${processHeaderVisible ? 'visible' : ''
+            }`}
         >
           <span className="section-labelc">
             How We Work
@@ -330,9 +327,8 @@ const Home = () => {
       >
         <div
           ref={testimonialsHeaderRef}
-          className={`testimonials-preview-header reveal ${
-            testimonialsHeaderVisible ? 'visible' : ''
-          }`}
+          className={`testimonials-preview-header reveal ${testimonialsHeaderVisible ? 'visible' : ''
+            }`}
         >
           <span className="section-label-dark">
             Client Stories
@@ -369,9 +365,8 @@ const Home = () => {
           {testimonials.map((_, index) => (
             <button
               key={index}
-              className={`carousel-dot ${
-                index === activeTestimonial ? 'active' : ''
-              }`}
+              className={`carousel-dot ${index === activeTestimonial ? 'active' : ''
+                }`}
               onClick={() => setActiveTestimonial(index)}
             />
           ))}
@@ -387,9 +382,8 @@ const Home = () => {
 
           <div
             ref={contactHeaderRef}
-            className={`contact-info reveal ${
-              contactHeaderVisible ? 'visible' : ''
-            }`}
+            className={`contact-info reveal ${contactHeaderVisible ? 'visible' : ''
+              }`}
           >
             <span className="section-label">
               Get in Touch

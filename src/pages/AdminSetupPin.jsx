@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import API_URL from '../api/apiConfig'
 import './AdminSetupPin.css'
 
 const AdminSetupPin = () => {
@@ -39,7 +40,7 @@ const AdminSetupPin = () => {
 
     try {
       const email = localStorage.getItem('pendingPinEmail')
-      await axios.post('http://localhost:5000/api/v1/admin/setup-pin', {
+      await axios.post(`${API_URL}/api/v1/admin/setup-pin`, {
         email,
         pin: pin.join('')
       })

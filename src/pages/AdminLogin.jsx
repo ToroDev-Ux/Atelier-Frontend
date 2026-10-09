@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Cookies from 'universal-cookie'
 import { Mail } from 'lucide-react'
+import API_URL from '../api/apiConfig'
 import './AdminLogin.css'
 
 const cookies = new Cookies()
@@ -26,7 +27,7 @@ const AdminLogin = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:5000/api/v1/admin/check-email',
+        `${API_URL}/api/v1/admin/check-email`,
         { email }
       )
 
@@ -58,8 +59,8 @@ const AdminLogin = () => {
 
     try {
       const endpoint = method === 'pin'
-        ? 'http://localhost:5000/api/v1/admin/login-pin'
-        : 'http://localhost:5000/api/v1/admin/login-password'
+        ? `${API_URL}/api/v1/admin/login-pin`
+        : `${API_URL}/api/v1/admin/login-password`
 
       const payload = method === 'pin'
         ? { email, pin: pin.join('') }

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import API_URL from '../api/apiConfig'
 import './AdminSignup.css'
 
 const AdminResetPin = () => {
@@ -17,7 +18,7 @@ const AdminResetPin = () => {
     setError('')
     setLoading(true)
     try {
-      await axios.post('http://localhost:5000/api/v1/admin/send-otp', { email, purpose: 'pin-reset' })
+      await axios.post(`${API_URL}/api/v1/admin/send-otp`, { email, purpose: 'pin-reset' })
       setStep('reset')
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to send code')
@@ -31,7 +32,7 @@ const AdminResetPin = () => {
     setError('')
     setLoading(true)
     try {
-      await axios.post('http://localhost:5000/api/v1/admin/reset-pin', { email, code, newPin })
+      await axios.post(`${API_URL}/api/v1/admin/reset-pin`, { email, code, newPin })
       navigate('/admin/login')
     } catch (err) {
       setError(err.response?.data?.message || 'Reset failed')

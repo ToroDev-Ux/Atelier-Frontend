@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-
+import API_URL from '../api/apiConfig'
 import { useNavigate } from 'react-router-dom'
 
 import axios from 'axios'
@@ -43,7 +43,7 @@ const AdminSignup = () => {
       try {
 
         const response = await axios.get(
-          'http://localhost:5000/api/v1/admin/owner-exists'
+          `${API_URL}/api/v1/admin/owner-exists`
         )
 
         setOwnerExists(response.data.ownerExists)
@@ -120,7 +120,7 @@ const AdminSignup = () => {
     try {
 
       await axios.post(
-        'http://localhost:5000/api/v1/admin/send-otp',
+        `${API_URL}/api/v1/admin/send-otp`,
         {
           email: formData.email,
           purpose: 'signup'
@@ -155,7 +155,7 @@ const AdminSignup = () => {
     try {
 
       await axios.post(
-        'http://localhost:5000/api/v1/admin/verify-otp',
+        `${API_URL}/api/v1/admin/verify-otp`,
         {
           email: formData.email,
           code: otpCode,
@@ -164,8 +164,8 @@ const AdminSignup = () => {
       )
 
       const endpoint = signupType === 'owner'
-        ? 'http://localhost:5000/api/v1/admin/signup-owner'
-        : 'http://localhost:5000/api/v1/admin/signup-admin'
+  ? `${API_URL}/api/v1/admin/signup-owner`
+  : `${API_URL}/api/v1/admin/signup-admin`
 
       await axios.post(endpoint, formData)
 

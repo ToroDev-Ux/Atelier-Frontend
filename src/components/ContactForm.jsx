@@ -3,6 +3,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
 import { Send } from 'lucide-react'
+import API_URL from '../api/apiConfig'
 import './ContactForm.css'
 
 // A unique key for where we store this specific form's data in localStorage
@@ -42,11 +43,10 @@ const ContactForm = () => {
 
     onSubmit: async (values, { resetForm, setStatus }) => {
       try {
-        await axios.post('http://localhost:5000/api/v1/contact', values)
+        await axios.post(`${API_URL}/api/v1/contact`, values)
 
         localStorage.removeItem(STORAGE_KEY)
 
-        // Explicitly pass the blank values we want to reset TO
         resetForm({
           values: { name: '', email: '', phone: '', message: '' }
         })
@@ -59,7 +59,6 @@ const ContactForm = () => {
     }
   })
 
-  // Every time any field changes, save the current values to localStorage
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(formik.values))
   }, [formik.values])
@@ -135,9 +134,11 @@ const ContactForm = () => {
       {formik.status === 'success' && (
         <p className="form-feedback success">Thank you for Subscribing — we'll be in touch soon.</p>
       )}
+
       {formik.status === 'error' && (
         <p className="form-feedback error">Something went wrong. Please try again.</p>
       )}
+
     </form>
   )
 }

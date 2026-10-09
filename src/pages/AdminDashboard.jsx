@@ -4,7 +4,7 @@ import axios from 'axios'
 import Cookies from 'universal-cookie'
 import { UserPlus, LogOut, Trash2, SendHorizontal } from 'lucide-react'
 import './AdminDashboard.css'
-
+import API_URL from '../api/apiConfig'
 const cookies = new Cookies()
 
 const AdminDashboard = () => {
@@ -45,7 +45,7 @@ const AdminDashboard = () => {
 
       try {
         const response = await axios.get(
-          'http://localhost:5000/api/v1/admin/messages',
+          `${API_URL}/api/v1/admin/messages`,
           {
             headers: { Authorization: `Bearer ${token}` }
           }
@@ -71,7 +71,7 @@ const AdminDashboard = () => {
     const fetchMe = async () => {
       try {
         const res = await axios.get(
-          'http://localhost:5000/api/v1/admin/me',
+          `${API_URL}/api/v1/admin/me`,
           {
             headers: { Authorization: `Bearer ${token}` }
           }
@@ -149,7 +149,7 @@ const AdminDashboard = () => {
     for (const msg of unreadInThread) {
       try {
         await axios.patch(
-          `http://localhost:5000/api/v1/admin/messages/${msg._id}/read`,
+          `${API_URL}/api/v1/admin/messages/${msg._id}/read`,
           {},
           {
             headers: { Authorization: `Bearer ${token}` }
@@ -181,7 +181,7 @@ const AdminDashboard = () => {
 
     try {
       await axios.post(
-        `http://localhost:5000/api/v1/admin/messages/${latestMessage._id}/reply`,
+        `${API_URL}/api/v1/admin/messages/${latestMessage._id}/reply`,
         {
           replyMessage: replyText
         },
@@ -459,7 +459,7 @@ const ManageAdminsModal = ({
       )
 
       await axios.post(
-        'http://localhost:5000/api/v1/admin/verify-pin',
+        `${API_URL}/api/v1/admin/verify-pin`,
         {
           id: decoded.id,
           pin
@@ -573,7 +573,7 @@ const ManageAdminsPanel = ({
     try {
 
       const response = await axios.get(
-        'http://localhost:5000/api/v1/admin/whitelist',
+        `${API_URL}/api/v1/admin/whitelist`,
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -614,8 +614,7 @@ const ManageAdminsPanel = ({
     try {
 
       await axios.post(
-        'http://localhost:5000/api/v1/admin/whitelist',
-        {
+  `${API_URL}/api/v1/admin/whitelist`,        {
           email: newEmail
         },
         {
@@ -654,7 +653,7 @@ const ManageAdminsPanel = ({
     try {
 
       await axios.delete(
-        'http://localhost:5000/api/v1/admin/remove',
+        `${API_URL}/api/v1/admin/remove`,
         {
           headers: {
             Authorization: `Bearer ${token}`
