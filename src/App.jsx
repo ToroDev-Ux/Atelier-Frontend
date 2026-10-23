@@ -1,49 +1,66 @@
-// Routing tools: Route defines a path, Routes holds them all, Navigate redirects
-import { Route, Routes, Navigate } from 'react-router-dom'
-
-// Shared shell (Header + Outlet) for pages that need the navbar
+import { Routes, Route, Navigate } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
 
-// Every page component
 import Home from './pages/Home'
 import Portfolio from './pages/Portfolio'
-import Contact from './pages/Contact'
-import Login from './pages/Login'
-import Signup from './pages/Signup'
-import AdminSignup from './pages/AdminSignup'
+import NotFound from './pages/NotFound'
+
 import AdminWelcome from './pages/AdminWelcome'
+import AdminSignup from './pages/AdminSignup'
 import AdminSetupPin from './pages/AdminSetupPin'
 import AdminLogin from './pages/AdminLogin'
 import AdminDashboard from './pages/AdminDashboard'
 import AdminForgotPassword from './pages/AdminForgotPassword'
 import AdminResetPin from './pages/AdminResetPin'
 
+import {
+  ProtectedAdminRoute,
+  GuestAdminRoute,
+  PinSetupRoute,
+} from './components/AdminGuards'
 
 const App = () => {
   return (
     <Routes>
-      {/* Everything inside here gets the Header */}
-<Route element={<MainLayout />}>
-
-        {/* Visiting "/" sends you straight to "/home" */}
-        <Route index element={<Navigate to="/home" />} />
-
+      {/* Public site, with Header and Footer */}
+      <Route element={<MainLayout />}>
+        <Route index element={<Navigate to="/home" replace />} />
         <Route path="/home" element={<Home />} />
         <Route path="/portfolio" element={<Portfolio />} />
-             <Route path="/contact" element={<Contact />} />
-        
+
+        {/* Old removed pages send visitors home instead of a 404 */}
+        <Route path="/services" element={<Navigate to="/home" replace />} />
+        <Route path="/process" element={<Navigate to="/home" replace />} />
+        <Route path="/testimonials" element={<Navigate to="/home" replace />} />
+        <Route path="/contact" element={<Navigate to="/home" replace />} />
       </Route>
 
-      {/* Outside Layout — no Header on these */}
-      <Route path="/admin/signup" element={<AdminSignup />} />
-      <Route path="/admin" element={<AdminWelcome />} />
-      <Route path="/admin/setup-pin" element={<AdminSetupPin />} />
-      <Route path="/admin/dashboard" element={<AdminDashboard />} />
-      <Route path="/admin/login" element={<AdminLogin />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
+      {/* Admin: only for visitors who are logged out */}
+      <Route element={<GuestAdminRoute />}>
+        <Route path="/admin" element={<AdminWelcome />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/signup" element={<AdminSignup />} />
+      </Route>
+
+      {/* Admin: recovery pages stay open */}
       <Route path="/admin/forgot-password" element={<AdminForgotPassword />} />
-<Route path="/admin/reset-pin-request" element={<AdminResetPin />} />
+      <Route path="/admin/reset-pin-request" element={<AdminResetPin />} />
+
+      {/* Admin: only while a signup is waiting for its PIN */}
+      <Route element={<PinSetupRoute />}>
+        <Route path="/admin/setup-pin" element={<AdminSetupPin />} />
+      </Route>
+
+      {/* Admin: only for logged-in admins */}
+      <Route element={<ProtectedAdminRoute />}>
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+      </Route>
+
+      {/* Any unknown admin URL goes to /admin */}
+      <Route path="/admin/*" element={<Navigate to="/admin" replace />} />
+
+      {/* Everything else shows the animated 404 */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   )
 }

@@ -123,7 +123,8 @@ const AdminSignup = () => {
         `${API_URL}/api/v1/admin/send-otp`,
         {
           email: formData.email,
-          purpose: 'signup'
+          purpose: 'signup',
+          signupType,
         }
       )
 
