@@ -10,6 +10,7 @@ import Portfolio from './pages/Portfolio'
 import Contact from './pages/Contact'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import NotFound from './pages/NotFound'
 
 // Admin pages
 import AdminSignup from './pages/AdminSignup'
@@ -66,6 +67,8 @@ const App = () => {
       {/* Regular user authentication pages */}
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      {/* Catch-all route for unknown URLs */}
+<Route path="*" element={<NotFound />} />
     </Routes>
   )
 }
