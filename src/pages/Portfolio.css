@@ -121,3 +121,44 @@
   margin: 0 auto;
   padding: 0 64px 120px;
 }
+@media (max-width: 1024px) {
+  .portfolio-hero {
+    gap: 40px;
+    padding: 140px 40px 80px;
+  }
+
+  .portfolio-page-header {
+    padding: 40px 40px 32px;
+  }
+
+  .portfolio-page-grid {
+    padding: 0 40px 96px;
+    gap: 36px;
+  }
+}
+
+@media (max-width: 800px) {
+  .portfolio-hero {
+    grid-template-columns: 1fr;
+    padding: 112px 24px 56px;
+    gap: 32px;
+  }
+
+  .hero-heading {
+    font-size: 34px;
+  }
+
+  .hero-description {
+    max-width: none;
+  }
+
+  .portfolio-page-header {
+    padding: 24px;
+  }
+
+  .portfolio-page-grid {
+    grid-template-columns: 1fr;
+    padding: 0 24px 72px;
+    gap: 32px;
+  }
+}

@@ -43,3 +43,8 @@
   text-transform: uppercase;
   color: #8a8a8a;
 }
+@media (max-width: 600px) {
+  .portfolio-card-title {
+    font-size: 20px;
+  }
+}

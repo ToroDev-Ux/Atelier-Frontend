@@ -116,3 +116,12 @@
   .nf-plan .draw { animation: none; stroke-dashoffset: 0; }
   .nf-progress span { animation: none; transform: scaleX(1); }
 }
+@media (max-width: 480px) {
+  .nf-code {
+    font-size: 56px;
+  }
+
+  .nf-heading {
+    font-size: 22px;
+  }
+}

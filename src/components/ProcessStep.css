@@ -37,3 +37,21 @@
   color: #6b6b6b;
   max-width: 600px;
 }
+@media (max-width: 600px) {
+  .process-step {
+    grid-template-columns: 72px 1fr;
+    padding: 32px 0;
+  }
+
+  .process-step-number {
+    font-size: 40px;
+  }
+
+  .process-step-title {
+    font-size: 22px;
+  }
+
+  .process-step-description {
+    font-size: 15px;
+  }
+}

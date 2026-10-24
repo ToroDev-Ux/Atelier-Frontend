@@ -457,3 +457,96 @@
 .reply-feedback.error {
   color: #c62828;
 }
+/* Hidden on desktop */
+.back-btn {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .dashboard-page {
+    grid-template-columns: 1fr;
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  .dashboard-main {
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  /* One panel at a time */
+  .dashboard-page.chat-open .dashboard-sidebar {
+    display: none;
+  }
+
+  .dashboard-page:not(.chat-open) .dashboard-main {
+    display: none;
+  }
+
+  .back-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: 6px;
+    margin-left: -6px;
+    cursor: pointer;
+    color: #1a1a1a;
+  }
+
+  .conversation-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 16px 14px;
+  }
+
+  .thread-list {
+    padding: 16px;
+  }
+
+  .message-bubble {
+    max-width: 92%;
+  }
+
+  .reply-bar {
+    padding: 10px 12px 12px;
+  }
+
+  .reply-input {
+    font-size: 16px;
+  }
+
+  .sidebar-logo {
+    padding: 16px;
+  }
+
+  .sidebar-controls {
+    padding: 12px 16px;
+  }
+
+  .sidebar-item {
+    padding: 14px 16px;
+  }
+
+  .sidebar-footer {
+    padding: 10px 16px;
+  }
+
+  .modal-overlay {
+    padding: 16px;
+  }
+
+  .modal-card {
+    padding: 24px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .whitelist-form input,
+  .pin-verify-input,
+  .delete-confirm input {
+    font-size: 16px;
+  }
+}

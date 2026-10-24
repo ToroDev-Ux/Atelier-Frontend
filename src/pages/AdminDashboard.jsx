@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Cookies from 'universal-cookie'
-import { UserPlus, LogOut, Trash2, SendHorizontal } from 'lucide-react'
+import { UserPlus, LogOut, Trash2, SendHorizontal, ArrowLeft } from 'lucide-react'
 import './AdminDashboard.css'
 import API_URL from '../api/apiConfig'
 const cookies = new Cookies()
@@ -18,6 +18,9 @@ const AdminDashboard = () => {
   const [isOwner, setIsOwner] = useState(false)
   const [showManageAdmins, setShowManageAdmins] = useState(false)
   const [adminInfo, setAdminInfo] = useState(null)
+
+  // MOBILE: on phones, shows the conversation instead of the contact list
+  const [showChat, setShowChat] = useState(false)
 
   // Reply state
   const [replyText, setReplyText] = useState('')
@@ -136,6 +139,9 @@ const AdminDashboard = () => {
   )
 
   const handleSelectContact = async (contact) => {
+    // MOBILE: open the conversation view
+    setShowChat(true)
+
     setSelectedEmail(contact.email)
 
     // Clear previous reply state when switching conversations
@@ -214,7 +220,8 @@ const AdminDashboard = () => {
   }
 
   return (
-    <div className="dashboard-page">
+    // MOBILE: the chat-open class tells the CSS which panel to show on phones
+    <div className={`dashboard-page ${showChat ? 'chat-open' : ''}`}>
 
       <aside className="dashboard-sidebar">
 
@@ -342,13 +349,25 @@ const AdminDashboard = () => {
 
             <div className="conversation-header">
 
-              <p className="conversation-name">
-                {selectedContact.name}
-              </p>
+              {/* MOBILE: back arrow, hidden on desktop by the CSS */}
+              <button
+                className="back-btn"
+                onClick={() => setShowChat(false)}
+                aria-label="Back to conversations"
+              >
+                <ArrowLeft size={18} strokeWidth={1.5} />
+              </button>
 
-              <p className="conversation-email">
-                {selectedContact.email}
-              </p>
+              {/* MOBILE: name and email are now wrapped in one div */}
+              <div>
+                <p className="conversation-name">
+                  {selectedContact.name}
+                </p>
+
+                <p className="conversation-email">
+                  {selectedContact.email}
+                </p>
+              </div>
 
             </div>
 
@@ -378,42 +397,37 @@ const AdminDashboard = () => {
 
             </div>
 
-<div className="reply-bar">
-  <div className="reply-bar-inner">
-    <textarea
-      className="reply-input"
-      placeholder={`Reply to ${selectedContact.name}...`}
-      value={replyText}
-      rows={1}
-      onChange={(e) => setReplyText(e.target.value)}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
-          e.preventDefault()
-          if (replyText.trim() && replyStatus !== 'sending') {
-            handleSendReply(
-              selectedContact.messages[selectedContact.messages.length - 1]._id
-            )
-          }
-        }
-      }}
-    />
-    <button
-      className="reply-send"
-      onClick={() =>
-        handleSendReply(
-          selectedContact.messages[selectedContact.messages.length - 1]._id
-        )
-      }
-      disabled={replyStatus === 'sending' || !replyText.trim()}
-      aria-label="Send reply"
-    >
-      <SendHorizontal size={18} strokeWidth={1.5} />
-    </button>
-  </div>
+            <div className="reply-bar">
+              <div className="reply-bar-inner">
+                <textarea
+                  className="reply-input"
+                  placeholder={`Reply to ${selectedContact.name}...`}
+                  value={replyText}
+                  rows={1}
+                  onChange={(e) => setReplyText(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                      e.preventDefault()
+                      if (replyText.trim() && replyStatus !== 'sending') {
+                        handleSendReply()
+                      }
+                    }
+                  }}
+                />
+                <button
+                  className="reply-send"
+                  onClick={handleSendReply}
+                  disabled={replyStatus === 'sending' || !replyText.trim()}
+                  aria-label="Send reply"
+                >
+                  <SendHorizontal size={18} strokeWidth={1.5} />
+                </button>
+              </div>
 
-  {replyStatus === 'sent' && <p className="reply-feedback success">Reply sent</p>}
-  {replyStatus === 'error' && <p className="reply-feedback error">Failed to send. Please try again.</p>}
-</div>
+              {replyStatus === 'sent' && <p className="reply-feedback success">Reply sent</p>}
+              {replyStatus === 'error' && <p className="reply-feedback error">Failed to send. Please try again.</p>}
+            </div>
+
           </div>
         ) : (
 
@@ -614,7 +628,8 @@ const ManageAdminsPanel = ({
     try {
 
       await axios.post(
-  `${API_URL}/api/v1/admin/whitelist`,        {
+        `${API_URL}/api/v1/admin/whitelist`,
+        {
           email: newEmail
         },
         {

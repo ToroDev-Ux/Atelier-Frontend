@@ -46,3 +46,18 @@
   margin: 0 auto 24px;
   display: block;
 }
+@media (max-width: 768px) {
+  .testimonial-card {
+    min-height: 260px;
+  }
+
+  .testimonial-quote {
+    font-size: 20px;
+    margin-bottom: 24px;
+  }
+
+  .testimonial-quote-icon {
+    width: 44px;
+    height: 44px;
+  }
+}

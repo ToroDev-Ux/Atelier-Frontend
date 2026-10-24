@@ -251,3 +251,38 @@
   cursor: pointer;
   text-decoration: underline;
 }
+@media (max-width: 900px) {
+  .admin-split-page {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  /* The photo becomes a short banner above the form */
+  .admin-photo-panel {
+    order: -1;
+    min-height: 150px;
+    padding: 24px;
+  }
+
+  .admin-quote {
+    font-size: 16px;
+  }
+
+  .admin-form-panel {
+    padding: 32px 24px 48px;
+    justify-content: flex-start;
+    overflow-y: visible;
+  }
+
+  .input-field input {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 420px) {
+  .input-row {
+    flex-direction: column;
+  }
+}
